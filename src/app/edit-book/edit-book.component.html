@@ -1,0 +1,150 @@
+<div class="container">
+  <button
+    type="button"
+    class="btn btn-primary pull-right"
+    data-toggle="modal"
+    data-target="#myModal"
+    (click)="onOpenNewBookForm()"
+  >
+    Create New Book
+  </button>
+</div>
+<div *ngFor="let book of booksList; let i = index">
+  <div class="container-12">
+    <div class="col-lg-4 col-md-6 md-4">
+      <div class="card h-100" style="margin-top: 20px;">
+        <div>
+          <img
+            class="card-img-top"
+            style="max-height:200px; max-width: 300px;"
+            src="{{ book.imagePath }}"
+            alt="Responsive image"
+          />
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">
+            <div class="not-extands">
+              {{ book.name }}
+            </div>
+          </h4>
+          <h5>${{ book.price }}</h5>
+          <p class="card-text">
+            {{ book.author }}
+          </p>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#myModal"
+          (click)="onOpenExistingBookForm(book, i)"
+        >
+          Edit
+        </button>
+        <div class="card-footer">
+          <small class="text-muted"
+            >&#9733; &#9733; &#9733; &#9733; &#9734;</small
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- The Modal -->
+<div class="modal " id="myModal">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h3 class="modal-title text-primary">Edit book</h3>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="bookDetailForm" (ngSubmit)="onSubmit()">
+          <div formGroupName="bookData">
+            <div class="form-group">
+              <label for="name">Name :</label>
+              <input
+                formControlName="name"
+                type="text"
+                id="name"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="author">Author :</label>
+              <input
+                formControlName="author"
+                type="text"
+                id="author"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="year">Year of publication:</label>
+              <input
+                formControlName="year"
+                type="number"
+                id="year"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="price"> price (in US Dollar) :</label>
+              <input
+                formControlName="price"
+                type="number"
+                id="price"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="imagePath">imagePath :</label>
+              <input
+                formControlName="imagePath"
+                type="text"
+                id="imagePath"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="isbn">ISBN-10:</label>
+              <input
+                [readOnly]="isExistBook"
+                formControlName="isbn"
+                type="text"
+                id="isbn"
+                class="form-control"
+                placeholder="Must be exact 10 digits"
+                minlength="10"
+                maxlength="10"
+              />
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button
+                [disabled]="!bookDetailForm.valid"
+                type="submit"
+                class="btn btn-success"
+              >
+                Submit
+              </button>
+              <button
+                #closeButton
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

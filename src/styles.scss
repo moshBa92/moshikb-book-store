@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+div.not-extands {
+  padding-right: 120px;
+  white-space: nowrap;
+  width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.not-extands {  
+    white-space: nowrap;
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

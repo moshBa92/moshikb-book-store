@@ -1,0 +1,31 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a routerLink="/" class="navbar-brand">Book store</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active">
+          <a routerLink="/books-list">Book List</a>
+        </li>
+        <li routerLinkActive="active">
+         
+          <a   routerLink="/shopping-cart"
+            >Shopping Cart({{ shoppingCartPrudoct }})</a
+          >
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li routerLinkActive="active" *ngIf="isAuth">
+          <a routerLink="/edit-book">Edit Book</a>
+        </li>
+        <li *ngIf="!isAuth" routerLinkActive="active">
+          <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="isAuth" routerLinkActive="active">
+          <a (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

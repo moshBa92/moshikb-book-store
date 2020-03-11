@@ -1,0 +1,48 @@
+<div class="container mx-auto" style="height: 100%; min-height: 100%;">
+  <h1 class=" text-primary">Shopping Cart</h1>
+  <ul class="list-group">
+    <li
+      *ngFor="let book of shoppingCartList; let i = index"
+      class="list-group-item"
+    >
+      <div
+        style="cursor: pointer;"
+        [routerLink]="[]"
+        routerLinkActive="active"
+        class="list-group-item clearfix"
+      >
+        <div class="pull-left">
+          <h4 class="list-group-item-heading">{{ book.name }}</h4>
+          <p class="list-group-item-text">{{ book.author }}</p>
+          <p class="list-group-item-text">{{ book.YearOfPublication }}</p>
+          <p class="list-group-item-text">${{ book.price }}</p>
+        </div>
+        <div>
+          <button
+            (click)="onDeleteBookFromCart(i)"
+            class="fixed-bottom btn btn-danger btn pull-right"
+          >
+            <span class="glyphicon glyphicon-trash"></span> Remove
+          </button>
+        </div>
+        <span>
+          <img
+            [src]="book.imagePath"
+            alt="{{ book.name }}"
+            class="img-responsive pull-right "
+            style="max-height: 120px; padding-right :20px ;"
+          />
+        </span>
+      </div>
+    </li>
+  </ul>
+  <button
+    (click)="onClearShoppingCart()"
+    class="fixed-bottom btn btn-danger btn pull-right"
+  >
+    <span class="glyphicon glyphicon-trash"></span> Remove All
+  </button>
+  <h1 class="text-success  ">
+    total amount : ${{ getTotalAmount() | number }}
+  </h1>
+</div>

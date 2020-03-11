@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h1 *ngIf="!isAuth" class="text-success">Login as an admin</h1>
+      <hr />
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="adminData">
+          <div *ngIf="!isAuth" class="form-group">
+            <label for="email">email</label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              class="form-control"
+            />
+            <hr />
+            <span *ngIf="!email.valid && email.touched" class="text-danger"
+              >please enter a valid email !</span
+            >
+          </div>
+          <div *ngIf="!isAuth" class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+            />
+            <hr />
+            <span
+              *ngIf="!password.valid && password.touched"
+              class="text-danger"
+            >
+              <span *ngIf="password.errors?.required"
+                >Please enter password</span
+              >
+              <span *ngIf="password.errors?.minlength"
+                >The password must be at least six characters long
+              </span>
+            </span>
+          </div>
+        </div>
+        <button
+          *ngIf="!isAuth"
+          [disabled]="!loginForm.valid"
+          class="btn btn-primary"
+          type="submit"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

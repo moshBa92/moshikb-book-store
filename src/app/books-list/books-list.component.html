@@ -1,0 +1,44 @@
+<input
+  class="form-control"
+  type="text"
+  placeholder="Search"
+  aria-label="Search"
+  [ngModel]="text"
+  (ngModelChange)="onfilterBooks($event)"
+/>
+<div *ngFor="let book of booksList">
+  <div class="container-12">
+    <div class="col-lg-4 col-md-6 md-4">
+      <div class="card h-100" style="margin-top: 20px;">
+        <div>
+          <img
+            class="card-img-top"
+            style="max-height:200px; max-width: 300px;"
+            src="{{ book.imagePath }}"
+            alt="Responsive image"
+          />
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a>
+              <div
+                class="not-extands"
+                (click)="onBookDetailPageLoad(book.isbn)"
+              >
+                {{ book.name }}
+              </div>
+            </a>
+          </h4>
+          <h5>${{ book.price }}</h5>
+          <p class="card-text">
+            {{ book.author }}
+          </p>
+        </div>
+        <button class="btn btn-primary" (click)="onAddBookToShoppingCart(book)">
+          Add to cart
+        </button>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+  </div>
+</div>
